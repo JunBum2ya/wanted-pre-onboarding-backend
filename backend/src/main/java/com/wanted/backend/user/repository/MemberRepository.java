@@ -1,5 +1,9 @@
 package com.wanted.backend.user.repository;
 
-public interface MemberRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.wanted.backend.user.entity.Member;
+
+public interface MemberRepository extends JpaRepository<Member,String>{
 
 }
