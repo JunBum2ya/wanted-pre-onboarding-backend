@@ -2,7 +2,9 @@ package com.wanted.backend.user.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.wanted.backend.global.util.DateUtil;
 import jakarta.persistence.*;
@@ -19,22 +21,26 @@ public class Member {
 	private String password;
 	private final LocalDateTime createDate;
 	private LocalDateTime updateDate;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_authority"
 			,joinColumns = @JoinColumn(name = "email")
 			,inverseJoinColumns = @JoinColumn(name = "authority_name"))
-	private final List<Authority> authorityList;
+	private final Set<Authority> authorityList;
 	
 	public Member() {
 		this.createDate = DateUtil.now();
 		this.updateDate = DateUtil.now();
-		this.authorityList = new ArrayList<>();
+		this.authorityList = new HashSet<>();
 	}
 	
 	public Member(String email,String password) {
 		this();
 		this.email = email;
 		this.password = password;
+	}
+
+	public void addAuthority(Authority authority) {
+		this.authorityList.add(authority);
 	}
 
 }
