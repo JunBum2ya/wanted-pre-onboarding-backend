@@ -21,7 +21,7 @@ public class Member {
 	private String password;
 	private final LocalDateTime createDate;
 	private LocalDateTime updateDate;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "tb_user_authority"
 			,joinColumns = @JoinColumn(name = "email")
 			,inverseJoinColumns = @JoinColumn(name = "authority_name"))
