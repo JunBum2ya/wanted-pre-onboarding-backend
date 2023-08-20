@@ -15,9 +15,9 @@ public class CustomUserDetails implements UserDetails,Serializable {
 	
 	private final String username;
 	private final String password;
-	private final List<GrantedAuthority> authorities;
+	private final List<? extends GrantedAuthority> authorities;
 	
-	public CustomUserDetails(String userId,String password,List<GrantedAuthority> authorities) {
+	public CustomUserDetails(String userId,String password,List<? extends GrantedAuthority> authorities) {
 		this.username = userId;
 		this.password = password;
 		this.authorities = authorities;
