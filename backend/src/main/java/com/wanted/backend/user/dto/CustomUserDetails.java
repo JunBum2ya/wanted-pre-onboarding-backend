@@ -4,10 +4,14 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.wanted.backend.user.entity.Authority;
+import com.wanted.backend.user.entity.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.StringUtils;
 
 public class CustomUserDetails implements UserDetails,Serializable {
 
@@ -28,6 +32,17 @@ public class CustomUserDetails implements UserDetails,Serializable {
 		this.password = password;
 		SimpleGrantedAuthority authority = new SimpleGrantedAuthority("DEFAULT");
 		this.authorities = Arrays.asList(authority);
+	}
+
+	public CustomUserDetails(Member member) {
+		this.username = member.getEmail();
+		this.password = member.getPassword();
+		this.authorities = member.getAuthorityList()
+				.stream()
+				.map(Authority::getName)
+				.filter(StringUtils::hasText)
+				.map(SimpleGrantedAuthority::new)
+				.collect(Collectors.toList());
 	}
 
 	@Override

@@ -13,10 +13,8 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name = "tb_authority")
 public class Authority {
     @Id
@@ -26,6 +24,16 @@ public class Authority {
     private String comment;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
+    private Authority(String name) {
+        this(name,null);
+    }
+
+    @Builder
+    private Authority(String name,String comment) {
+        this.name = name;
+        this.comment = comment;
+    }
 
     public void update(String name,String comment) {
         this.update(comment);

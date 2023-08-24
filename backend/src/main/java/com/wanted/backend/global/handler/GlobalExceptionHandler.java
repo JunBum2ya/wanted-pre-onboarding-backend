@@ -2,6 +2,7 @@ package com.wanted.backend.global.handler;
 
 import java.util.stream.Collectors;
 
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -42,6 +43,14 @@ public class GlobalExceptionHandler {
         String message = e.getMessage();
         ErrorResponse response = new ErrorResponse(message);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DuplicateKeyException.class)
+    public ResponseEntity<ErrorResponse> handleDuplicateKeyException(DuplicateKeyException e) {
+        log.error(e.getMessage());
+        String message = e.getMessage();
+        ErrorResponse response = new ErrorResponse(message);
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 	
     @ExceptionHandler(Exception.class)

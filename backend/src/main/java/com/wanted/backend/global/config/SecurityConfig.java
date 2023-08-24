@@ -1,8 +1,5 @@
 package com.wanted.backend.global.config;
 
-import com.wanted.backend.global.filter.CustomCsrfTokenFilter;
-import com.wanted.backend.global.filter.CustomJwtFilter;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,9 +8,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.csrf.CsrfFilter;
-import org.springframework.web.filter.CorsFilter;
 
 import com.wanted.backend.global.handler.JwtAccessDeniedHandler;
 

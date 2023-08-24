@@ -34,6 +34,6 @@ public class MemberJoinRequest {
 	}
 	
 	public Member toEntity(PasswordEncoder passwordEncoder) {
-		return new Member(email,passwordEncoder.encode(password));
+		return Member.builder().email(email).password(passwordEncoder.encode(password)).build();
 	}
 }
